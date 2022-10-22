@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from "axios"
 
+var baseUrl = 'http://127.0.0.1:8000'
 
 export const useUserStore = defineStore({
   id: 'user',
@@ -25,7 +26,7 @@ export const useUserStore = defineStore({
         headers: { Authorization: `Bearer ${this.userToken}` }
       };
       try {
-        const data = await axios.get('https://giga.prototype.com.my/api/fgv-pmps/profil', config)
+        const data = await axios.get(baseUrl + '/api/fgv-pmps/profil', config)
         
         this.userName = data.data.nama;
         this.userRole = data.data.peranan;
@@ -38,7 +39,7 @@ export const useUserStore = defineStore({
 
     async login(nama, katalaluan) {
       try {
-        const data = await axios.post('https://giga.prototype.com.my/api/login', {
+        const data = await axios.post(baseUrl + '/api/login', {
           namalogin: nama,
           katalaluan: katalaluan,
           projek_id: 1
@@ -57,7 +58,7 @@ export const useUserStore = defineStore({
         headers: { Authorization: `Bearer ${this.userToken}` }
       };
       try {
-        const data = await axios.get('https://giga.prototype.com.my/api/fgv-pmps/tugasan', config)
+        const data = await axios.get(baseUrl + '/api/fgv-pmps/tugasan', config)
         this.tasksRetrieved = data.data;
         console.log(this.tasksRetrieved);
       }
@@ -72,7 +73,7 @@ export const useUserStore = defineStore({
       //   headers: { Authorization: `Bearer ${this.userToken}` }
       // };
       // try {
-      //   const data = await axios.post('https://giga.prototype.com.my/api/fgv-pmps/tugasan', config)
+      //   const data = await axios.post(baseUrl + '/api/fgv-pmps/tugasan', config)
       //   this.tasksRetrieved = data.data;
       //   console.log(this.tasksRetrieved);
       // }
@@ -82,8 +83,27 @@ export const useUserStore = defineStore({
       // }
     },
 
-    submitTask(dataSaved) {
-      this.tasksStored.push(dataSaved);
+    async ciptaTask(pekerja, pokok, tandan, jenis, tarikh) {
+      console.log(pekerja);
+      const config = {
+        headers: { Authorization: `Bearer ${this.userToken}` }
+      };
+      try {
+        const data = await axios.post(baseUrl + '/api/fgv-pmps/tugasan', {
+          pekerja: pekerja,
+          pokok: pokok,
+          tandan: tandan,
+          jenis: jenis,
+          tarikh: tarikh,          
+        }, config)
+        console.log(data.data);
+      }
+      catch (error) {
+        //alert(error)
+        console.log(error)
+      }      
+      // this.tasksStored.push(newTask);
+      // console.log(this.tasksStored);
     },
 
     verifyTask() {

@@ -4,11 +4,11 @@
 
             <ion-item>
                 <ion-label position="stacked">Pekerja</ion-label>
-                <ion-input v-model="pekerja"></ion-input>
+                <ion-input id="pekerja" name="pekerja" v-model="pekerja"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label position="stacked">Jenis</ion-label>
-                <ion-select id="jenis" v-model="jenis" placeholder="Pilih kerja">
+                <ion-select id="jenis" name="jenis" v-model="jenis" placeholder="Pilih kerja">
                     <ion-select-option value="balut">Balut Tandan</ion-select-option>
                     <ion-select-option value="debung">Pedebungaan</ion-select-option>
                     <ion-select-option value="kawalan">Kawalan Kualiti</ion-select-option>
@@ -17,15 +17,15 @@
             </ion-item>
             <ion-item>
                 <ion-label position="stacked">Pokok</ion-label>
-                <ion-input v-model="pokok"></ion-input>
+                <ion-input id="pokok" name="pokok" v-model="pokok"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label position="stacked">Tandan</ion-label>
-                <ion-input v-model="tandan"></ion-input>
+                <ion-input id="tandan" name="tandan" v-model="tandan"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label position="stacked">Tarikh</ion-label>
-                <ion-input v-model="tarikh"></ion-input>
+                <ion-input id="tarikh" name="tarikh" v-model="tarikh"></ion-input>
             </ion-item>
             <ion-button @click="cipta()" fill="outline">Cipta Tugasan</ion-button>
             <ion-button @click="scan('pokok')" fill="outline">Scan Pokok</ion-button>
@@ -39,7 +39,7 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { IonPage, IonContent } from '@ionic/vue';
+import { IonPage, IonContent, IonLabel, IonButton, IonInput, IonSelect, IonSelectOption, IonItem } from '@ionic/vue';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { useUserStore } from "@/stores/users";
 import { useIonRouter } from '@ionic/vue';
@@ -48,7 +48,7 @@ export default defineComponent({
     name: 'CiptaTugasanPage',
     components: {
         IonContent,
-        IonPage,        
+        IonPage, IonLabel, IonButton, IonInput, IonSelect, IonSelectOption, IonItem     
     },
     data() {
         return {
@@ -92,8 +92,8 @@ export default defineComponent({
 
         },
 
-        ciptaTugasan() {
-            this.ionRouter.navigate('/tabs/cipta-tugasan');
+        cipta() {
+            this.store.ciptaTask(this.pekerja, this.pokok, this.tandan, this.jenis, this.tarikh)
         }
 
     }
