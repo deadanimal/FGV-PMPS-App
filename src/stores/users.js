@@ -21,12 +21,14 @@ export const useUserStore = defineStore({
     },
 
     async getProfile() {
-      console.log('Component has been created!');
+      const config = {
+        headers: { Authorization: `Bearer ${this.userToken}` }
+      };
       try {
-        const data = await axios.get('https://giga.prototype.com.my/api/fgv-pmps/profil')
-        this.userName = data.data;
-        console.log(data.data)
-        //this.users = data.data
+        const data = await axios.get('https://giga.prototype.com.my/api/fgv-pmps/profil', config)
+        
+        this.userName = data.data.nama;
+        this.userRole = data.data.peranan;
       }
       catch (error) {
         //alert(error)
@@ -41,7 +43,7 @@ export const useUserStore = defineStore({
           katalaluan: katalaluan,
           projek_id: 1
         })
-        this.userToken = data.data.token;
+        this.userToken = data.data.token;        
         return this.userToken;
       }
       catch (error) {
@@ -50,16 +52,38 @@ export const useUserStore = defineStore({
       }
     },
 
-    getTasks() {
-
+    async getTasks() {
+      const config = {
+        headers: { Authorization: `Bearer ${this.userToken}` }
+      };
+      try {
+        const data = await axios.get('https://giga.prototype.com.my/api/fgv-pmps/tugasan', config)
+        this.tasksRetrieved = data.data;
+        console.log(this.tasksRetrieved);
+      }
+      catch (error) {
+        //alert(error)
+        console.log(error)
+      }
     },
 
-    sendTasks() {
-
+    async sendTasks() {
+      // const config = {
+      //   headers: { Authorization: `Bearer ${this.userToken}` }
+      // };
+      // try {
+      //   const data = await axios.post('https://giga.prototype.com.my/api/fgv-pmps/tugasan', config)
+      //   this.tasksRetrieved = data.data;
+      //   console.log(this.tasksRetrieved);
+      // }
+      // catch (error) {
+      //   //alert(error)
+      //   console.log(error)
+      // }
     },
 
-    submitTask() {
-
+    submitTask(dataSaved) {
+      this.tasksStored.push(dataSaved);
     },
 
     verifyTask() {

@@ -4,7 +4,7 @@ import TabsPage from '../views/TabsPage.vue'
 const routes = [
   {
     path: '/',
-    redirect: '/tabs/tab1'
+    redirect: '/tabs/home'
   },
   {
     path: '/tabs/',
@@ -12,11 +12,15 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: '/tabs/tab1'
+        redirect: '/tabs/home'
       },
       {
-        path: 'tab1',
-        component: () => import('@/views/Tab1Page.vue')
+        path: 'home',
+        component: () => import('@/views/HomePage.vue')
+      },        
+      {
+        path: 'cipta-tugasan',
+        component: () => import('@/views/CiptaTugasanPage.vue')
       },
       {
         path: 'tab2',
@@ -32,6 +36,7 @@ const routes = [
     path: '/login',
     component: () => import('@/views/LoginPage.vue')
   },  
+ 
 ]
 
 const router = createRouter({

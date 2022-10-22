@@ -42,7 +42,8 @@ export default defineComponent({
     methods: {
         login() {
             this.store.login(this.nama, this.katalaluan).then(()=> {
-                console.log('OK');
+                this.store.getProfile();
+                this.ionRouter.navigate('/tabs/home',);
             })
         }
     }

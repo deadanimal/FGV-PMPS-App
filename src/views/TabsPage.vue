@@ -9,7 +9,7 @@
 
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="tab1" href="/tabs/tab1">
+        <ion-tab-button tab="tab1" href="/tabs/home">
           <ion-icon :icon="home" />
           <ion-label>Home</ion-label>
         </ion-tab-button>
@@ -32,15 +32,14 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { IonHeader, IonTitle, IonTabBar, IonTabButton, IonTabs, IonPage, IonRouterOutlet } from '@ionic/vue';
-// import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonPage, IonRouterOutlet } from '@ionic/vue';
+import { IonHeader, IonTitle, IonTabBar, IonTabButton, IonTabs, IonPage, IonRouterOutlet, IonLabel, IonToolbar, IonIcon } from '@ionic/vue';
 import { home, person, fileTrayStacked } from 'ionicons/icons';
 import { useUserStore } from "@/stores/users";
 import { useIonRouter } from '@ionic/vue';
 
 export default defineComponent({
   name: 'TabsPage',
-  components: { IonHeader, IonTitle,IonTabs, IonTabBar, IonTabButton, IonPage, IonRouterOutlet },
+  components: { IonHeader, IonTitle,IonTabs, IonTabBar, IonTabButton, IonPage, IonRouterOutlet, IonLabel, IonToolbar, IonIcon },
   setup() {
     const ionRouter = useIonRouter();
     const store = useUserStore();
@@ -53,10 +52,7 @@ export default defineComponent({
     }
   },
   created() {
-    if(this.store.userToken == null) {
-      console.log('OUT');
-      this.ionRouter.navigate('/login');
-    }
+
   }
 });
 </script>
