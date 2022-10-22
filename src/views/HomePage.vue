@@ -7,15 +7,16 @@
       <ion-button @click="ciptaTugasan()" fill="outline">Cipta Tugasan</ion-button>
 
 
-      <ion-card color="dark">
+      <ion-card color="light" v-for="item in store.tasksRetrieved" :key="item.id">
         <ion-card-header>
-          <ion-card-title>Kerja</ion-card-title>
+          <ion-card-title>{{item.id}} Kerja</ion-card-title>
           <ion-card-subtitle>Status</ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content>
           Coordinate, Bila dan link
         </ion-card-content>
+        <ion-button color="dark" fill="clear" @click="keTugas(item.id, item.jenis)">Lihat</ion-button>
       </ion-card>
 
 
@@ -26,7 +27,7 @@
 <script>
 import { defineComponent } from 'vue';
 import { IonPage, IonContent } from '@ionic/vue';
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton } from '@ionic/vue';
 import { useUserStore } from "@/stores/users";
 import { useIonRouter } from '@ionic/vue';
 
@@ -39,7 +40,7 @@ export default defineComponent({
     IonCardContent,
     IonCardHeader,
     IonCardSubtitle,
-    IonCardTitle
+    IonCardTitle, IonButton
   },
 
   setup() {
@@ -49,10 +50,10 @@ export default defineComponent({
   },
 
   created() {
-    setInterval(()=> {
+    setInterval(() => {
       this.checkLogin();
     }, 1000);
-  
+
     this.store.getProfile();
   },
 
@@ -61,7 +62,7 @@ export default defineComponent({
     checkLogin() {
       if (this.store.userToken == null) {
         this.ionRouter.navigate('/login');
-      } 
+      }
     },
 
     ambilTugasan() {
@@ -74,6 +75,10 @@ export default defineComponent({
 
     ciptaTugasan() {
       this.ionRouter.navigate('/tabs/cipta-tugasan');
+    },
+
+    keTugas(id, jenis) {
+      console.log(id, jenis);
     }
 
   }

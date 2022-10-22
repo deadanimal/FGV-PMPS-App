@@ -14,12 +14,12 @@
           <ion-label>Home</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab2" href="/tabs/tab2">
+        <!-- <ion-tab-button tab="tab2" href="/tabs/tab2">
           <ion-icon :icon="fileTrayStacked" />
           <ion-label>Kerja</ion-label>
-        </ion-tab-button>        
+        </ion-tab-button>         -->
           
-        <ion-tab-button tab="tab3" href="/tabs/tab3">
+        <ion-tab-button tab="tab3" href="/tabs/profil">
           <ion-icon :icon="person" />
           <ion-label>Profil</ion-label>
         </ion-tab-button>

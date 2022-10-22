@@ -25,7 +25,7 @@ import { defineComponent } from 'vue';
 import { IonPage, IonContent } from '@ionic/vue';
 
 export default defineComponent({
-  name: 'Tugasan',
+  name: 'TugasanKawalanPage',
   components: { IonContent, IonPage }
 });
 </script>
