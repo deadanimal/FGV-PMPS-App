@@ -23,6 +23,11 @@ const routes = [
         component: () => import('@/views/CiptaTugasanPage.vue')
       },
       {
+        path: 'tugasan/:id',
+        name: 'satu-tugasan',
+        component: () => import('@/views/TugasanPage.vue')
+      },      
+      {
         path: 'tab2',
         component: () => import('@/views/Tab2Page.vue')
       },

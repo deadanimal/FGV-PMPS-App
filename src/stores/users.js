@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from "axios"
 
-var baseUrl = 'http://127.0.0.1:8000'
+var baseUrl = process.env.VUE_APP_BASE_URL
 
 export const useUserStore = defineStore({
   id: 'user',
@@ -13,7 +13,8 @@ export const useUserStore = defineStore({
     userToken: null,
 
     tasksRetrieved: [],
-    tasksStored: []
+    tasksStored: [],
+    taskSelected: null,
   }),
 
   actions: {
@@ -109,6 +110,10 @@ export const useUserStore = defineStore({
     verifyTask() {
 
     },
+
+    pilihTask(id) {
+      this.taskSelected = this.tasksRetrieved.find(x => x.id == id);
+    }
 
 
   }
