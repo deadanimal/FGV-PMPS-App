@@ -27,7 +27,11 @@ const routes = [
         component: () => import('@/views/Tab3Page.vue')
       }
     ]
-  }
+  },
+  {
+    path: '/login',
+    component: () => import('@/views/LoginPage.vue')
+  },  
 ]
 
 const router = createRouter({

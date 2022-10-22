@@ -25,7 +25,7 @@ import { defineComponent } from 'vue';
 import { IonPage, IonContent } from '@ionic/vue';
 
 export default defineComponent({
-  name: 'Tab3Page',
+  name: 'Home',
   components: { IonContent, IonPage }
 });
 </script>

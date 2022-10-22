@@ -1,5 +1,5 @@
 <template>
-  <ion-page>
+  <ion-page>   
 
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
