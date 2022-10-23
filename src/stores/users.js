@@ -62,6 +62,7 @@ export const useUserStore = defineStore({
         const data = await axios.get(baseUrl + '/api/fgv-pmps/tugasan', config)
         this.tasksRetrieved = data.data;
         console.log(this.tasksRetrieved);
+        return data.data;
       }
       catch (error) {
         //alert(error)
@@ -85,7 +86,6 @@ export const useUserStore = defineStore({
     },
 
     async ciptaTask(pekerja, pokok, tandan, jenis, tarikh) {
-      console.log(pekerja);
       const config = {
         headers: { Authorization: `Bearer ${this.userToken}` }
       };
@@ -103,8 +103,6 @@ export const useUserStore = defineStore({
         //alert(error)
         console.log(error)
       }      
-      // this.tasksStored.push(newTask);
-      // console.log(this.tasksStored);
     },
 
     verifyTask() {
@@ -113,7 +111,45 @@ export const useUserStore = defineStore({
 
     pilihTask(id) {
       this.taskSelected = this.tasksRetrieved.find(x => x.id == id);
-    }
+    },
+
+    async saveRosak(tandanId, sebab, catatan, image) {
+      const form = new FormData();
+      form.append("tandan", tandanId);
+      form.append("sebab", sebab);
+      form.append("catatan", catatan);
+      form.append("gambar", image);
+      const config = {
+        headers: { Authorization: `Bearer ${this.userToken}`, "Content-Type": "multipart/form-data" }
+      };
+      try {
+        const data = await axios.post(baseUrl + '/api/fgv-pmps/rosak', form, config)
+        console.log(data.data);
+      }
+      catch (error) {
+        //alert(error)
+        console.log(error)
+      }        
+    },    
+
+    async saveTaskBalut(id, catatan, image) {
+      this.tasksRetrieved = this.tasksRetrieved.filter(x => x.id != id);
+      const form = new FormData();
+      form.append("catatan_pekerja", catatan);
+      form.append("gambar", image);
+      const config = {
+        headers: { Authorization: `Bearer ${this.userToken}`, "Content-Type": "multipart/form-data" }
+      };
+      try {
+        const data = await axios.post(baseUrl + '/api/fgv-pmps/tugasan/' + id + '/siap-balut', form, config)
+        console.log(data.data);
+      }
+      catch (error) {
+        //alert(error)
+        console.log(error)
+      }        
+    },
+
 
 
   }

@@ -2,20 +2,21 @@
   <ion-page>
     <ion-content :fullscreen="true">
 
-      <ion-button @click="ambilTugasan()" fill="outline">Ambil Tugasan</ion-button>
-      <ion-button @click="hantarTugasan()" fill="outline">Hantar Tugasan</ion-button>
-      <ion-button router-link="/tabs/cipta-tugasan" fill="outline">Cipta Tugasan</ion-button>
+      <ion-button @click="ambilTugasan()" fill="outline">Ambil</ion-button>
+      <!-- <ion-button @click="hantarTugasan()" fill="outline">Hantar</ion-button> -->
+      <ion-button router-link="/tabs/cipta-tugasan" fill="outline">Cipta</ion-button>
 
 
       <h1 v-if="store.tasksRetrieved.length > 0">Tugasan Baru</h1>
       <ion-card color="light" v-for="item in store.tasksRetrieved" :key="item.id">
         <ion-card-header>
-          <ion-card-title>{{item.id}} {{item.jenis}}</ion-card-title>
-          <ion-card-subtitle>{{item.status}}</ion-card-subtitle>
+          <ion-card-title v-if="item.jenis == 'balut'">{{item.jenis}} Pokok {{item.pokok_id}}</ion-card-title>
+          <ion-card-title v-else>{{item.jenis}} Tandan {{item.tandan_id}}</ion-card-title>
+          <ion-card-subtitle>Status: {{item.status}}</ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content>
-          {{item}}
+          <!-- ID: {{item.id}} -->
         </ion-card-content>
         <router-link :to="`/tabs/tugasan/${item.id}`"><ion-button color="dark" fill="clear">Lihat</ion-button></router-link>
       </ion-card>
@@ -23,12 +24,13 @@
       <h1 v-if="store.tasksStored.length > 0">Tugasan Disimpan</h1>
       <ion-card color="light" v-for="item in store.tasksStored" :key="item.id">
         <ion-card-header>
-          <ion-card-title>{{item.id}} {{item.jenis}}</ion-card-title>
-          <ion-card-subtitle>{{item.status}}</ion-card-subtitle>
+          <ion-card-title v-if="item.jenis == 'balut'">{{item.jenis}} Pokok {{item.pokok_id}}</ion-card-title>
+          <ion-card-title v-else>{{item.jenis}} Tandan {{item.tandan_id}}</ion-card-title>
+          <ion-card-subtitle>Status: {{item.status}}</ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content>
-          Coordinate, Bila dan link
+          <!-- Coordinate, Bila dan link -->
         </ion-card-content>
         <ion-button color="dark" fill="clear" router-link="/tabs/tugasan/' + {{item.id}} +'">Lihat</ion-button>
       </ion-card>      
@@ -64,9 +66,9 @@ export default defineComponent({
   },
 
   created() {
-    setInterval(() => {
-      this.checkLogin();
-    }, 1000);
+    // setInterval(() => {
+    //   this.checkLogin();
+    // }, 1000);
 
     this.store.getProfile();
   },

@@ -1,6 +1,6 @@
 <template>
     <ion-page>
-        <ion-content :fullscreen="true">
+        <ion-content :fullscreen="true" padding>
 
             <ion-item>
                 <ion-label position="stacked">Pekerja</ion-label>
@@ -99,3 +99,6 @@ export default defineComponent({
     }
 });
 </script>
+
+<style>
+</style>

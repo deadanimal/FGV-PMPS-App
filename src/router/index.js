@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
-import TabsPage from '../views/TabsPage.vue'
+import TabsPage from '../views/TabsPage.vue';
 
 const routes = [
   {
     path: '/',
-    redirect: '/tabs/home'
+    redirect: '/login'
   },
   {
     path: '/tabs/',
@@ -26,7 +26,11 @@ const routes = [
         path: 'tugasan/:id',
         name: 'satu-tugasan',
         component: () => import('@/views/TugasanPage.vue')
-      },      
+      },   
+      {
+        path: 'rosak',
+        component: () => import('@/views/RosakPage.vue')
+      },            
       {
         path: 'tab2',
         component: () => import('@/views/Tab2Page.vue')
@@ -43,6 +47,11 @@ const routes = [
   },  
  
 ]
+
+// router.beforeEach((to, from, next) => {
+//   if (!useUserStore.isAuthenticated) next({ name: 'Login' })
+//   else next()
+// })
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
